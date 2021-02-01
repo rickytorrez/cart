@@ -2,3 +2,8 @@
 main {
 	min-height: 80vh;
 }
+
+.card-title {
+	height: 2.6rem;
+	overflow: hidden;
+}
