@@ -8,14 +8,13 @@ const products = [
 		brand: 'Apple',
 		category: 'Electronics',
 		price: 89.99,
-		countInStock: 10,
+		countInStock: 0,
 		rating: 4.5,
-		numReviews: 12,
+		numReviews: 4,
 	},
 	{
 		_id: '2',
-		name:
-			'iPhone 11 Pro 256GB Memory  Pro 256GB Memory  Pro 256GB Memory  Pro 256GB Memory',
+		name: 'iPhone 11 Pro 256GB Memory',
 		image: '../images/phone.jpg',
 		description:
 			'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
