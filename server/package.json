@@ -4,6 +4,7 @@
 	"description": "MERN Shopping Cart Application",
 	"main": "server.js",
 	"type": "module",
+	"typeComments": "type allows us the ability to use import modyles rather than regular required modules on node",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server",
@@ -20,6 +21,7 @@
 		"colors": "^1.4.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"express-async-handler": "^1.1.4",
 		"mongoose": "^5.11.15"
 	},
 	"devDependencies": {
