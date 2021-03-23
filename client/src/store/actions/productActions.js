@@ -3,7 +3,7 @@ import {
 	PRODUCT_LIST_REQUEST,
 	PRODUCT_LIST_SUCCESS,
 	PRODUCT_LIST_FAIL,
-} from '../actions/productActions';
+} from './productActions';
 
 /**  action creator that takes care of loading the products when the component mounts*/
 export const listProducts = () => async (dispatch) => {
