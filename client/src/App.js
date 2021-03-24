@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap';
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -20,6 +21,8 @@ const App = () => {
 					<Route path='/' component={HomeScreen} exact />
 					{/* :id is a placeholder for the product._id */}
 					<Route path='/product/:id' component={ProductScreen} />
+					{/* :id? makes the id parameter optional */}
+					<Route path='/cart/:id?' component={CartScreen} />
 				</Container>
 			</main>
 			<Footer />

@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../store/actions/productActions';
 import { Link } from 'react-router-dom';
 
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import {
+	Form,
+	Row,
+	Col,
+	Image,
+	ListGroup,
+	Card,
+	Button,
+} from 'react-bootstrap';
 import Rating from '../components/Rating';
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
+	const [quantity, setQuantity] = useState(1);
+
 	const dispatch = useDispatch();
 
 	/**
@@ -28,6 +38,16 @@ const ProductScreen = ({ match }) => {
 	useEffect(() => {
 		dispatch(listProductDetails(match.params.id));
 	}, [dispatch, match]);
+
+	/**
+	 * addToCartHandler
+	 * routes us to the cart page (history help) and takes parameters of
+	 * match.params.id => product id
+	 * quantity => being passed with a query string
+	 */
+	const addToCartHandler = () => {
+		history.push(`/cart/${match.params.id}?quantity=${quantity}`);
+	};
 
 	return (
 		<>
@@ -80,8 +100,38 @@ const ProductScreen = ({ match }) => {
 										</Col>
 									</Row>
 								</ListGroup.Item>
+
+								{product.countInStock > 0 && (
+									<ListGroup.Item>
+										<Row>
+											<Col>Quantiy:</Col>
+											<Col className='select-form'>
+												{/* Form Control provides a select drop down where quantity is passed as an initial value
+                            Takes an onChangeProp to set the quantity on local state
+                        */}
+												<Form.Control
+													as='select'
+													value={quantity}
+													onChange={(e) => setQuantity(e.target.value)}
+												>
+													{/* Quantity options spread out the array, it takes the countInStocks' keys => [0,1,2,3,4] IE: countInStock is 5
+                              maps for x and displays an option tag with a key which is x + 1 => array starts with 0 so the +1 makes it start at 1
+                              value will also be x + 1
+                          */}
+													{[...Array(product.countInStock).keys()].map((x) => (
+														<option key={x + 1} value={x + 1}>
+															{x + 1}
+														</option>
+													))}
+												</Form.Control>
+											</Col>
+										</Row>
+									</ListGroup.Item>
+								)}
+
 								<ListGroup.Item>
 									<Button
+										onClick={addToCartHandler}
 										className='btn btn-block'
 										type='button'
 										disabled={product.countInStock === 0}
