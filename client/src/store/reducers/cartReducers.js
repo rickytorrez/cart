@@ -12,8 +12,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 			 */
 			const item = action.payload;
 
-			console.log(`what is the item` + item);
-
 			/**
 			 * looks to see if the cartItem exists in the cartItems array
 			 * cartItem.product is the id
@@ -21,8 +19,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 			const existItem = state.cartItems.find(
 				(cartItem) => cartItem.product === item.product
 			);
-
-			console.log(`exist item is a boolean? ` + existItem);
 
 			/**
 			 * if existItem is true
