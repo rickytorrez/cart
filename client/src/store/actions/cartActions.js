@@ -1,5 +1,5 @@
-rimport axios from 'axios';
-eimport { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
+import axios from 'axios';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 
 /**
  * addToCart is an action that will route to the server
