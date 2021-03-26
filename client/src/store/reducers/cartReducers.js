@@ -48,6 +48,20 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 					cartItems: [...state.cartItems, item],
 				};
 			}
+		case CART_REMOVE_ITEM:
+			return {
+				/**
+				 * returns the spread state
+				 */
+				...state,
+				/**
+				 * returns the cartItems where it filters out the one we're removing by comparing the item.product (id) that is not equal to the action.payload
+				 * essentially stripping out whatver id that we remove
+				 */
+				cartItems: state.cartItems.filter(
+					(item) => item.product !== action.payload
+				),
+			};
 		default:
 			return state;
 	}

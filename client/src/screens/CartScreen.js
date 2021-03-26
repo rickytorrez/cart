@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
  */
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart } from '../store/actions/cartActions';
+import { addToCart, removeFromCart } from '../store/actions/cartActions';
 
 import Message from '../components/Message';
 import {
@@ -63,7 +63,7 @@ const CartScreen = ({ match, location, history }) => {
 	 * @param {string} id product id
 	 */
 	const removeFromCartHandler = (id) => {
-		console.log('removed ' + id);
+		dispatch(removeFromCart(id));
 	};
 
 	/**

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { CART_ADD_ITEM } from '../constants/cartConstants';
+rimport axios from 'axios';
+eimport { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 
 /**
  * addToCart is an action that will route to the server
@@ -35,6 +35,29 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
 	 * cartItems is saved to localStorage
 	 * Turn the JS object into a JSON string
 	 * use getState to get the cartItems inside the cart piece of reducer
+	 */
+	localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+/**
+ * remove from cart is an action that will remove an item from the user cart
+ * @param {string} id product id to be removed
+ * dispatch to dispatch to reducer
+ * getState to get all the items in the cart to allow the reset of local storage to whatever is in the cart minus the removed item(s)
+ */
+export const removeFromCart = (id) => (dispatch, getState) => {
+	/**
+	 * dispatches an action
+	 * type: CART_REMOVE_ITEM
+	 * payload: object id that is removed
+	 */
+	dispatch({
+		type: CART_REMOVE_ITEM,
+		payload: id,
+	});
+
+	/**
+	 * saves the new cartItems in JSON format into local storage
 	 */
 	localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 };
