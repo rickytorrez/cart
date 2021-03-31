@@ -1,5 +1,5 @@
 /**
- * middleware to validate the token
+ * middleware to validate the token and use it to access a protected route
  */
 
 import jwt from 'jsonwebtoken';
