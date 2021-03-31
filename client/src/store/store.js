@@ -17,7 +17,14 @@ const reducer = combineReducers({
 });
 
 /**
- * cartItemsFromStorage checks to see if we have initial data to be added as the initialState
+ * userInfoFromStorage check to see if the application has initial data for userInfo - userToken
+ */
+const userInfoFromStorage = localStorage.getItem('userInfo')
+	? JSON.parse(localStorage.getItem('userInfo'))
+	: null;
+
+/**
+ * cartItemsFromStorage checks to see if the application has initial data for cartItems - products
  */
 const cartItemsFromStorage = localStorage.getItem('cartItems')
 	? JSON.parse(localStorage.getItem('cartItems'))
@@ -25,6 +32,7 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 
 const initialState = {
 	cart: { cartItems: cartItemsFromStorage },
+	userLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];

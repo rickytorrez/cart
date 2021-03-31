@@ -12,6 +12,9 @@ node_modules/
 # production
 /build
 
+# eslingcache
+.eslintcache
+
 # misc
 .DS_Store
 .env
