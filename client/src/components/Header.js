@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/actions/userActions';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -16,7 +17,7 @@ const Header = () => {
 	const { userInfo } = userLogin;
 
 	const logoutHandler = () => {
-		console.log('object');
+		dispatch(logout());
 	};
 
 	return (
