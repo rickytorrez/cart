@@ -28,7 +28,18 @@ const RegisterScreen = ({ history, location }) => {
 	/**
 	 * gets the needed part from our state
 	 */
-	const { loading, error, userInfo } = userRegister;
+	const { loading, error } = userRegister;
+
+	/**
+	 * gets userLogin slice of data from the state with useSelector
+	 * userLogin will be used to re-route when the user has logged out to the register page
+	 */
+	const userLogin = useSelector((state) => state.userLogin);
+
+	/**
+	 * gets the needed part from our state
+	 */
+	const { userInfo } = userLogin;
 
 	/**
 	 * checks for url query string
@@ -51,6 +62,7 @@ const RegisterScreen = ({ history, location }) => {
 		if (password !== confirmPassword) {
 			setMessage('Passwords do not match');
 		} else {
+			setMessage(null);
 			dispatch(register(name, email, password));
 		}
 	};

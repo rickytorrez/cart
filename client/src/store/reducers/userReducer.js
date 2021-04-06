@@ -30,6 +30,7 @@ export const userLoginReducer = (state = {}, action) => {
 
 /**
  * handles the state for user registration
+ * userInfo is no longer passed as a payload here since USER_LOGIN_SUCCESS is dealing with the userInfo data flow
  * @param {*} state initially an empty object
  * @param {*} action  switches on case type
  */
@@ -38,7 +39,7 @@ export const userRegisterReducer = (state = {}, action) => {
 		case USER_REGISTER_REQUEST:
 			return { loading: true };
 		case USER_REGISTER_SUCCESS:
-			return { loading: false, userInfo: action.payload };
+			return { loading: false };
 		case USER_REGISTER_FAIL:
 			return { loading: false, error: action.payload };
 		default:

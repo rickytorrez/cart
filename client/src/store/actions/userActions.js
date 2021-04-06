@@ -111,17 +111,15 @@ export const register = (name, email, password) => async (dispatch) => {
 		/**
 		 * when the request is completed
 		 *  dispatch the type of action for USER_REGISTER_SUCCESS
-		 *  for the payload, pass the data we get back from the request
+		 *  payload is dealth with on USER_LOGIN_SUCCESS
 		 */
 		dispatch({
 			type: USER_REGISTER_SUCCESS,
-			payload: data,
 		});
 
 		/**
-		 * after user has registered, the application should add his token to session and log him in
-		 *  dispatch the type of action for USER_LOGIN_SUCCESS
-		 *  for the payload, pass the data we get back from the request
+		 * after user has registered, the application should automatically log the user in
+		 * the payload is dealth with here avoiding data leaks around the application
 		 */
 		dispatch({
 			type: USER_LOGIN_SUCCESS,
