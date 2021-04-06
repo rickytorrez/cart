@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/actions/userActions';
+/**
+ * useHistory is used to route to login page when user logs out
+ */
+import { useHistory } from 'react-router-dom';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -16,8 +20,11 @@ const Header = () => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	const history = useHistory();
+
 	const logoutHandler = () => {
 		dispatch(logout());
+		history.push('/login');
 	};
 
 	return (
