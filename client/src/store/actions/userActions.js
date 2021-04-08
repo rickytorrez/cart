@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+	USER_DETAILS_FAIL,
+	USER_DETAILS_REQUEST,
+	USER_DETAILS_SUCCESS,
 	USER_LOGIN_FAIL,
 	USER_LOGIN_REQUEST,
 	USER_LOGIN_SUCCESS,
@@ -133,6 +136,51 @@ export const register = (name, email, password) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: USER_REGISTER_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+/**
+ * getUserDetails action to get user data
+ * @param {*} id id of the profile that is signed in
+ * getState allows us to get data from our current state
+ */
+export const getUserDetails = (id) => async (dispatch, getState) => {
+	try {
+		// destructure userInfo from userLogin from getState
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		// dispatches an action to get the user details
+		dispatch({
+			type: USER_DETAILS_REQUEST,
+		});
+
+		// content type for the request sent - headers
+		// attaches the token
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		// sends get request for userDetails
+		const { data } = await axios.get(`/api/users/${id}`, config);
+
+		// dispatches USER DETAILS SUCCESS
+		dispatch({
+			type: USER_DETAILS_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: USER_DETAILS_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
