@@ -9,6 +9,7 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -22,6 +23,7 @@ const App = () => {
 				<Container>
 					<Route path='/login' component={LoginScreen} />
 					<Route path='/register' component={RegisterScreen} />
+					<Route path='/profile' component={ProfileScreen} />
 					{/* :id is a placeholder for the product._id */}
 					<Route path='/product/:id' component={ProductScreen} />
 					{/* :id? makes the id parameter optional */}
