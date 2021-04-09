@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
  * useDispatch and useSelector are needed when the component needs access to redux
  */
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetails } from '../store/actions/userActions';
+import {
+	getUserDetails,
+	updateUserProfile,
+} from '../store/actions/userActions';
 
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -43,6 +46,16 @@ const ProfileScreen = ({ history }) => {
 	const { loading, error, user } = userDetails;
 
 	/**
+	 * gets userUpdateProfile slice of data from the state with useSelector
+	 */
+	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+
+	/**
+	 * gets the needed part from our state
+	 */
+	const { success } = userUpdateProfile;
+
+	/**
 	 * useEffect to make calls to the backend to get the user details
 	 * re routes user if there's no login info
 	 * dispatches getUserDetails if user.name is empty
@@ -67,7 +80,15 @@ const ProfileScreen = ({ history }) => {
 		if (password !== confirmPassword) {
 			setMessage('Passwords do not match');
 		} else {
-			// DISPATCH UPDATE PROFILE
+			// updateUserProfile expects a user object as the argument
+			dispatch(
+				updateUserProfile({
+					id: user._id,
+					name: name,
+					email: email,
+					password: password,
+				})
+			);
 		}
 	};
 
@@ -77,6 +98,7 @@ const ProfileScreen = ({ history }) => {
 				<h2>User Profile</h2>
 				{message && <Message variant='danger'>{message}</Message>}
 				{error && <Message variant='danger'>{error}</Message>}
+				{success && <Message variant='success'>Profile Updated</Message>}
 				{loading && <Loader />}
 				<Form onSubmit={submitHandler}>
 					<Form.Group controlId='name'>
