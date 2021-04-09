@@ -8,7 +8,10 @@ import {
  * cartReducer takes inital state, cartItems array for different and multiple items
  * action to be dispatched
  */
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (
+	state = { cartItems: [], shippingAddress: {} },
+	action
+) => {
 	switch (action.type) {
 		case CART_ADD_ITEM:
 			/**
