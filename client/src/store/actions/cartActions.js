@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
+import {
+	CART_ADD_ITEM,
+	CART_REMOVE_ITEM,
+	CART_SAVE_SHIPPING_ADDRESS,
+} from '../constants/cartConstants';
 
 /**
  * addToCart is an action that will route to the server
@@ -60,4 +64,20 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 	 * saves the new cartItems in JSON format into local storage
 	 */
 	localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+/**
+ * saves shipping address for customer
+ * @param {*} data takes in the form data as a parameter
+ */
+export const saveShippingAddress = (data) => (dispatch) => {
+	dispatch({
+		type: CART_SAVE_SHIPPING_ADDRESS,
+		payload: data,
+	});
+
+	/**
+	 * saves the address in JSON format into local storage
+	 */
+	localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
