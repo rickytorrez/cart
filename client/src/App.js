@@ -12,6 +12,7 @@ import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -28,6 +29,7 @@ const App = () => {
 					<Route path='/profile' component={ProfileScreen} />
 					<Route path='/shipping' component={ShippingScreen} />
 					<Route path='/payment' component={PaymentScreen} />
+					<Route path='/placeorder' component={PlaceOrderScreen} />
 					{/* :id is a placeholder for the product._id */}
 					<Route path='/product/:id' component={ProductScreen} />
 					{/* :id? makes the id parameter optional */}
