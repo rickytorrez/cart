@@ -12,6 +12,33 @@ const PlaceOrderScreen = () => {
 	 */
 	const cart = useSelector((state) => state.cart);
 
+	const addDecimals = (num) => {
+		return (Math.round(num * 100) / 100).toFixed(2);
+	};
+
+	/**
+	 * calculate items price
+	 * using reduce
+	 *  takes the accumulator and item as params
+	 *  it adds the accumulator and the item's price times the quantity
+	 *  0 is the start of the accumulator
+	 */
+	cart.itemsPrice = addDecimals(
+		cart.cartItems
+			.reduce((acc, item) => acc + item.price * item.quantity, 0)
+			.toFixed(2)
+	);
+
+	cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 10);
+
+	cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
+
+	cart.totalPrice = (
+		Number(cart.itemsPrice) +
+		Number(cart.shippingPrice) +
+		Number(cart.taxPrice)
+	).toFixed(2);
+
 	const placeOrderHandler = () => {
 		console.log('place order handler');
 	};
@@ -76,30 +103,30 @@ const PlaceOrderScreen = () => {
 					<Card>
 						<ListGroup var='flush'>
 							<ListGroup.Item>
-								<h2>Order Summary</h2>
+								<h2>Order Summary </h2>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
-									<Col>Items</Col>
-									<Col>${cart.itemsPrice}</Col>
+									<Col>Items </Col>
+									<Col>$ {cart.itemsPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
-									<Col>Shipping</Col>
-									<Col>${cart.shippingPrice}</Col>
+									<Col>Shipping </Col>
+									<Col>$ {cart.shippingPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Tax</Col>
-									<Col>${cart.taxPrice}</Col>
+									<Col>$ {cart.taxPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>${cart.totalPrice}</Col>
+									<Col>$ {cart.totalPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
