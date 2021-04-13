@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 /**
  * Checkout Steps is the component that guides the user through the checkout process - Road map
- * @param {*} param0
+ * @param {*} steps object parameter with props for breadcrumbs
  */
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
 	return (
